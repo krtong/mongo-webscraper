@@ -87,13 +87,13 @@ app.post("/articles/:id", function(req, res) {
      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
     })
     .then(function(dbArticle) {
+      console.log(dbArticle);
       res.json(dbArticle);
     })
     .catch(function(err) {
       res.json(err);
     });
-});
-
+})
 
 
 //npm start server
