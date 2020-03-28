@@ -81,19 +81,19 @@ app.get("/articles/:id", async function (req, res) {
 });
 
 
-app.post("/articles/:id", async function (req, res) {
-  try{
-    const dbNote = await db.Note.create(req.body)
-    const dbArticle = await db.Article.findOneAndUpdate(
-    {_id: req.params.id},
-    {note: dbNote._id},
-    {new: true});
-    res.json(dbArticle);
-  }
-  catch(err){
-    res.json(err)
-  }
+app.post("/articles/:id", function(req, res) {
+  db.Note.create(req.body)
+    .then(function(dbNote) {
+     return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    })
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
 });
+
 
 
 //npm start server
