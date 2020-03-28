@@ -35,24 +35,23 @@ $(document).on("click", "#add-note", async function () {
   // Now make an ajax call for the Article
   const data = await $.ajax({ method: "GET", url: `/articles/${thisId}`})
   $("#notes").append(`
-  <div class='row'>
-    <div class='col-sm-3'></div>
-    <div class='col-sm-6'>
-    <div class='card'>
-    <div class='card-body'>
-    <div class='card-title'><h4>${data.title}</h4></div>
-    <input id='titleinput' name='title' class='card-body'>
-    <textarea id='bodyinput' name='body'>
-    </textarea>
-    </input>
+    <div class='row'>
+      <div class='col-sm-3'></div>
+      <div class='col-sm-6'>
+        <div class='card'>
+          <div class='card-body'>
+            <div class='card-title'><h4>${data.title}</h4></div>
+            <input id='titleinput' name='title' class='card-body'>
+              <textarea id='bodyinput' name='body'></textarea>
+            </input>
+          </div>
+          <a href="#" class='btn btn-primary' data-id='${data._id}' id='savenote'>
+            Save Note
+          </a>
+        </div>
+      </div>
     </div>
-    <a href="#" class='btn btn-primary' data-id='${data._id}' id='savenote'>
-    Save Note
-    </a>
-    </div>
-    </div>
-  </div>
-  </br>
+    </br>
   `);
 
   if (data.note) {
